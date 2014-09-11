@@ -14,8 +14,39 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcGiueJDs4Ge_Z2fuXCTEuyRaj-n0L-YQ">
     </script>
     <script type="text/javascript">
+      var defPosition = new google.maps.LatLng(38.8808165,-77.102156);
+        
+      // Resturant list
+      var restList = [
+        new google.maps.LatLng();  // Chengduxiaoguan
+        new google.maps.LatLng();  // Chongqinglou
+        new google.maps.LatLng();  // Hangong
+        new google.maps.LatLng();  // XO taste
+        new google.maps.LatLng();  // Chuanlaichuanqu
+       ];
+        
+      var markers = [];
+      var iterator = 0;
+
+      function drop() {
+        for (var i = 0; i < restaurant.length; i++) {
+          setTimeout(function() {
+            addMarker();
+          }, i * 200);
+        }
+      }
+
+      function addMarker() {
+        markers.push(new google.maps.Marker({
+          position: restList[iterator],
+          map: map,
+          draggable: false,
+          animation: google.maps.Animation.DROP
+        }));
+        iterator++;
+      }
+        
       function initialize() {
-        var defPosition = new google.maps.LatLng(38.8808165,-77.102156);
         var mapOptions = {
           zoom: 12
         };
@@ -29,15 +60,11 @@
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = new google.maps.LatLng(position.coords.latitude,
                                             position.coords.longitude);
-            /* var infowindow = new google.maps.InfoWindow({
-              map: map,
-              position: pos,
-              content: 'You are here!'
-            }); */
             map.setCenter(pos);
-            var maker = new google.maps.Marker({
+            var marker = new google.maps.Marker({
               position: pos, 
               map: map, 
+              draggable: true,
               title: 'You are here!'
             });
           },function() {
@@ -45,6 +72,9 @@
           });
         } else {
           handleNoGeolocation(false);
+        }
+
+        drop();
       }
 
       function handleNoGeolocation(errorFlag) {
@@ -64,13 +94,17 @@
         map.setCenter(options.position);
       }
 
+
       google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
   </head>
   <body>
-    <input name="UserLoc" type="text" id="searchfd" size="20" placeholder="Your loaction" autocomplete="off">
-    <input type="submit" value="Search" id="searchbt" size="20">
+    <div id='findrest'>Find a resturant near:</div>
+    <div id='location field'>
+      <input id="searchfd" type="text" placeholder="Your loaction" />
+    </div>
+    <input id="searchbt" type="submit" value="GO!" />
     <div id="map-canvas"/>
   </body>
 </html>
