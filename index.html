@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>CCfood - Exploer the best chinese restaurant!</title>
     <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
@@ -15,7 +16,7 @@
         var myPosition = new google.maps.LatLng(38.8808165,-77.102156);
         var mapOptions = {
           center: myPosition,
-          zoom: 8
+          zoom: 12
         };
         var map = new google.maps.Map(document.getElementById("map-canvas"),
             mapOptions);
@@ -26,6 +27,8 @@
     </script>
   </head>
   <body>
+    <input type="text" id="Posearch" placeholder="Your loaction">
+    <input type="submit" value="Search">
     <div id="map-canvas"/>
   </body>
 </html>
