@@ -23,11 +23,12 @@
         var maker = new google.maps.Marker({position: myPosition,});
         maker.setMap(map);
       }
+
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
   </head>
   <body>
-    <input type="text" id="Posearch" placeholder="Your loaction">
+    <input name="UserLoc" type="text" id="search" size="10" placeholder="Your loaction" autocomplete="off">
     <input type="submit" value="Search">
     <div id="map-canvas"/>
   </body>
