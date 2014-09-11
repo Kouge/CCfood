@@ -20,7 +20,7 @@
       // Resturant list
       var restList = [
         new google.maps.LatLng(38.8689155,-77.1506881);  // Chengduxiaoguan
-        new google.maps.LatLng(38.9179158,-76.9706543);  // Sanbei
+        new google.maps.LatLng(38.9179158,-76.9706543);  // Shanbei
         new google.maps.LatLng(39.0944188,-77.1537503);  // Taipei Cafe
         new google.maps.LatLng(38.8699734,-77.1452468);  // XO taste
         new google.maps.LatLng(39.1190243,-77.1706429);  // Chuanlaichuanqu
@@ -96,7 +96,6 @@
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
-      google.maps.event.addDomListener(map, 'load', drop);
 
     </script>
   </head>
@@ -104,7 +103,7 @@
     <div id='findrest'>Find a resturant near:</div>
     <div id='loc-field'>
       <input id="searchfd" type="text" placeholder="Your loaction" />
-      <input id="searchbt" type="submit" value="GO!" />
+      <input id="searchbt" type="submit" onclick="drop()" value="GO!" />
     </div>
     <div id="map-canvas"/>
   </body>
