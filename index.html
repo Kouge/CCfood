@@ -87,10 +87,11 @@
         var options = {
           map: map,
           position: defPosition,
-          content: content
+          dragable: true,
+          title: 'Start here.'
         };
 
-        var infowindow = new google.maps.InfoWindow(options);
+        var marker = new google.maps.Marker(options);
         map.setCenter(options.position);
       }
 
