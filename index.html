@@ -3,13 +3,22 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <title>CCfood - Exploer the best chinese restaurant!</title>
-    <style type="text/css">
-      html { height: 100% }
-      body { height: 100%; margin: 0; padding: 0 ;text-align: center}
-      #map-canvas { height: 100%; margin: 20px; padding: 40px }
-      #loc-field {margin: 0px auto}
-      #searchfd {width: 500px; height: 40px}
-      #searchbt {width: 100px; height: 40px}
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      #panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
     </style>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcGiueJDs4Ge_Z2fuXCTEuyRaj-n0L-YQ">
@@ -68,11 +77,9 @@
     </script>
   </head>
   <body>
-    <div id='findrest'>Find a resturant near:</div>
-    <div id='loc-field'>
-      <input id="searchfd" type="text" placeholder="Your loaction" />
-      <input id="searchbt" type="submit" onclick="drop()" value="GO!" />
-    </div>
-    <div id="map-canvas"/>
+    <div id="panel" style="margin-left: -52px">
+      <button id="drop" onclick="drop()">Drop Markers</button>
+     </div>
+    <div id="map-canvas"></div>
   </body>
 </html>
