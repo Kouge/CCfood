@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8">
     <title>CCfood - Exploer the best chinese restaurant!</title>
     <style>
       html, body, #map-canvas {
@@ -20,59 +20,54 @@
         border: 1px solid #999;
       }
     </style>
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcGiueJDs4Ge_Z2fuXCTEuyRaj-n0L-YQ">
-    </script>
-    <script type="text/javascript">
-      var defPosition = new google.maps.LatLng(38.8808165,-77.102156);
-        
-      // Resturant list
-      var restList = [
-        new google.maps.LatLng(38.8689155,-77.1506881);  // Chengduxiaoguan
-        new google.maps.LatLng(38.9179158,-76.9706543);  // Shanbei
-        new google.maps.LatLng(39.0944188,-77.1537503);  // Taipei Cafe
-        new google.maps.LatLng(38.8699734,-77.1452468);  // XO taste
-        new google.maps.LatLng(39.1190243,-77.1706429);  // Chuanlaichuanqu
-       ];
-        
-      var markers = [];
-      var iterator = 0;
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcGiueJDs4Ge_Z2fuXCTEuyRaj-n0L-YQ"></script>
+    <script>
+    var myPos = new google.maps.LatLng(38.8808165,-77.102156);
+    var restList = [
+      new google.maps.LatLng(38.8689155,-77.1506881),  // Chengduxiaoguan
+      new google.maps.LatLng(38.9179158,-76.9706543),  // Shanbei
+      new google.maps.LatLng(39.0944188,-77.1537503),  // Taipei Cafe
+      new google.maps.LatLng(38.8699734,-77.1452468),  // XO taste
+      new google.maps.LatLng(39.1190243,-77.1706429)  // Chuanlaichuanqu
+    ];
+    var markers = [];
+    var iterator = 0;
 
-      var map;
+    var map;
+    var bound;
 
-      function initialize() {
-        var mapOptions = {
-          zoom: 12,
-          center: defPosition
-        };
-        var map = new google.maps.Map(document.getElementById("map-canvas"),
-            mapOptions);
-        var marker = new google.maps.Marker({
-          position: defPosition,
-          map: map;
-          draggable: true
-        });
+    function initialize() {
+      var mapOptions = {
+        zoom: 12,
+        center: myPos
+      };
+
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+        mapOptions);
+    }
+
+    function drop() {
+      bound = new google.maps.LatLngBounds(restList[0],restList[1]);
+      for (var i = 0; i < restList.length; i++) {
+        setTimeout(function() {
+          addMarker();
+        }, i * 200);
+        bound.extend(restList[i]);
       }
+      map.setCenter(bound.getCenter());
+    }
 
-      function drop() {
-        for (var i = 0; i < restList.length; i++) {
-          setTimeout(function() {
-            addMarker();
-          }, i * 200);
-        }
-      }
+    function addMarker() {
+      markers.push(new google.maps.Marker({
+        position: restList[iterator],
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP
+      }));
+      iterator++;
+    }
 
-      function addMarker() {
-        markers.push(new google.maps.Marker({
-          position: restList[iterator],
-          map: map,
-          draggable: false,
-          animation: google.maps.Animation.DROP
-        }));
-        iterator++;
-      }
-        
-      google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', initialize);
 
     </script>
   </head>
