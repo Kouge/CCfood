@@ -71,6 +71,14 @@
       new google.maps.LatLng(39.1190243,-77.1706429)  // Chuanlaichuanqu
     ];
 
+    var restName = [
+      "Chengduxiaoguan",
+      "Shanbei",
+      "Taipei Cafe",
+      "XO taste",
+      "Chuanlaichuanqu"
+    ];
+
     function initialize() {
 
       var markers = [];
@@ -146,7 +154,8 @@
           map: map,
           position: restList[i],
           draggable: false,
-          animation: google.maps.Animation.DROP
+          animation: google.maps.Animation.DROP,
+          title: restName[i]
         })
         setTimeout(function() {
           markers.push(tempMarker);
